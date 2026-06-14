@@ -172,7 +172,7 @@ function Footer() {
           <div className="font-headline-md text-headline-md text-secondary mb-2">
             Komorebi
           </div>
-          <p className="font-body-md text-secondary-fixed-dim text-sm max-w-[280px]">
+          <p className="font-body-md text-secondary-fixed-dim text-sm max-w-70">
             Curating the beauty of the world&apos;s journeys through intentional
             design and cartographic art.
           </p>
@@ -214,14 +214,14 @@ export function LandingPage() {
     <div className="bg-background">
       <MainNav />
       <main>
-        <section className="relative min-h-[921px] flex items-center pt-16 overflow-hidden">
+        <section className="relative min-h-230.25 flex items-center pt-16 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img
               alt="Kyoto Temple"
               className="w-full h-full object-cover"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgK0LKonNVAtbUkyo-Qds4GmExr3NGeLGG_xsMe0d5Yu7AwYRumgCSCfGRKUM_X9ksZBXd8xxmTW1TZarX5T-rXgqGn_sEi54vb4qfl6TQyuvFGynQEbmJJVCenvpVFwsN4JODfK-XSpmhOLmzZfbuQvZS5aVCN9NKY4PwiuvCHzSb1MNSFId83ay8RozqZMFzgFwDHsbp6DCrXZtF_KYcFkwdkumkAg-a46FqFER2IopIeSNLi-kNsjCq1x-oPyT91roo43L7hoo"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-background via-background/40 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-r from-background via-background/40 to-transparent" />
           </div>
           <div className="relative z-10 px-margin-desktop max-w-container-max mx-auto w-full">
             <div className="max-w-2xl">
