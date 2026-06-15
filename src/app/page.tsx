@@ -203,7 +203,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <Map />
       </main>
       <Footer />
     </div>
