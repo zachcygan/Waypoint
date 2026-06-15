@@ -3,6 +3,7 @@
 import { Footer } from "@/components/Footer";
 import { MainNav } from "@/components/MainNav";
 import { useRouter } from "next/navigation";
+import Map from "@/components/map";
 import { useEffect } from "react";
 import { Sparkles, Layers, GlobeX } from "lucide-react";
 
@@ -202,6 +203,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <Map />
       </main>
       <Footer />
     </div>
