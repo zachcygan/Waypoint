@@ -12,23 +12,46 @@ datasource db {
   provider = "postgresql"
 }
 
+model User {
+  id        String   @id
+  email     String   @unique
+  name      String?
+  trips     Trip[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Trip {
+  id        Int      @id @default(autoincrement())
+  name      String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  places    Place[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Place {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  address     String
+  latitude    Float?
+  longitude   Float?
+  photoUrl    String?
+  notes       String?
+  wantToVisit Boolean  @default(false)
+  category    Category
+  tripId      Int
+  trip        Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
 enum Category {
   hotels
   entertainment
   food
   carRentals
   shopping
-}
-
-model Place {
-  id          Int      @id @default(autoincrement())
-  name        String
-  address     String
-  latitude    Float?
-  longitude   Float?
-  wantToVisit Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  notes       String?
-  category    Category
 }
