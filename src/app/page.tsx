@@ -110,15 +110,15 @@ export default function Home() {
                 </li>
               </ul>
             </div>
-            <div className="relative rounded-xl overflow-hidden shadow-2xl reveal-on-scroll [transition-delay:200ms]">
-              <div className="aspect-[4/3] bg-surface-container-low">
+            <div className="relative rounded-xl overflow-hidden shadow-2xl reveal-on-scroll delay-200">
+              <div className="aspect-4/3 bg-surface-container-low">
                 <img
                   alt="Map Interface"
                   className="w-full h-full object-cover opacity-90"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1lDs4zx_UhvnC4rw-ralVOx8-XOnXRyJp8PQHANyJo58FHm_A5hjAanpdelquAJ29YgxX6xfeWVSIkIKdWbMngUMuZbSD4V4slF-B8uRWUNed8LTa4xrLRMq-LkJfU81w-A7Y7PzDuoBZAFYjMn1hk04kL2I-lTiXoHmBEdNP3cEKXlVLgYYA9YWuRB-U7R6ge3tQo-5JEd3ObUUB4xMUxbqLyqC5TtRM6zJiaFOgMSxD8vkSOZv37YrKliuybbVVHDQNPlZltq8"
                 />
                 <div className="absolute top-6 left-6 right-6 flex justify-between items-start">
-                  <div className="glass-panel p-4 rounded-lg border border-white/20 shadow-xl max-w-[200px]">
+                  <div className="glass-panel p-4 rounded-lg border border-white/20 shadow-xl max-w-50">
                     <p className="text-[10px] uppercase tracking-wider font-bold mb-2">
                       Waypoint 01
                     </p>
@@ -145,13 +145,13 @@ export default function Home() {
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-              <div className="md:col-span-2 relative h-[400px] rounded-xl overflow-hidden group reveal-on-scroll">
+              <div className="md:col-span-2 relative h-100 rounded-xl overflow-hidden group reveal-on-scroll">
                 <img
                   alt="Japanese Garden"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0vqy2yl-1T8Q0JbLafEsvweY7lp-PbtuwnDb7eCR3foTjQVh-lzZFlxGKRiTpaCExbFYP6xX8N0lOY5APCzuM_z-tSpo_BHQ0ioGSavH7Q9Mwv0zbvEXgooRC8U985SgfwZBSxaUDlcMlr-1Df3-MZltidS5M3HnV3vZ1XHw0-7nsuMuH5HwDTb14y9b7gTRUfYwkrCLi4K_dy4j1y5aKNkaZuBLACrPnAgR-AvSYhHgeXViaqznZ0N9wFM9-Eq2sP2pk4BlFv7E"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
                 <div className="absolute bottom-8 left-8 text-white">
                   <h3 className="font-headline-md text-headline-md mb-2">
                     Kyoto Autumn Collection
@@ -162,7 +162,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div className="relative h-[400px] rounded-xl overflow-hidden group reveal-on-scroll [transition-delay:100ms]">
+              <div className="relative h-100 rounded-xl overflow-hidden group reveal-on-scroll delay-100">
                 <img
                   alt="Tokyo Night"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"

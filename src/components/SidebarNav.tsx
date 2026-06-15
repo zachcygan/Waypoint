@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Map, LayoutDashboard, MapPin, Settings } from "lucide-react";
 
 type SidebarActive = "editor" | "trips" | "place";
 
@@ -11,7 +12,7 @@ export function SidebarNav({ active }: { active: SidebarActive }) {
     }`;
 
   return (
-    <aside className="hidden md:flex flex-col p-base space-y-4 h-full w-64 border-r border-outline-variant bg-surface-container-low sticky top-0">
+    <aside className="hidden md:flex flex-col p-base space-y-4 h-screen w-64 border-r border-outline-variant bg-surface-container-low sticky top-0">
       <div className="px-4 py-6">
         <h1 className="font-headline-md text-headline-md text-primary">
           Trip Planner
@@ -22,22 +23,19 @@ export function SidebarNav({ active }: { active: SidebarActive }) {
       </div>
       <nav className="flex-1 space-y-2 px-2">
         <Link href="/editor" className={linkStyle("editor")}>
-          <span className="material-symbols-outlined mr-3">map</span> Map Editor
+          <Map className="mr-3" /> Map Editor
         </Link>
         <Link href="/trips" className={linkStyle("trips")}>
-          <span className="material-symbols-outlined mr-3">dashboard</span>{" "}
-          Dashboard
+          <LayoutDashboard className="mr-3" /> Dashboard
         </Link>
         <Link href="/place" className={linkStyle("place")}>
-          <span className="material-symbols-outlined mr-3">location_on</span>{" "}
-          Waypoints
+          <MapPin className="mr-3" /> Waypoints
         </Link>
         <button
           className="flex w-full items-center px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200 cursor-pointer font-label-sm text-label-sm"
           type="button"
         >
-          <span className="material-symbols-outlined mr-3">settings</span>{" "}
-          Settings
+          <Settings className="mr-3" /> Settings
         </button>
       </nav>
       <div className="px-4 py-6 border-t border-outline-variant">
