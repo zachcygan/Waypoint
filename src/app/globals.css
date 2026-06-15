@@ -133,6 +133,17 @@ body {
   transform: translateY(-2px);
 }
 
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px;
 }
