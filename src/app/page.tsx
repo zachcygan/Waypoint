@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { MainNav } from "@/components/MainNav";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { Sparkles, Layers, GlobeX } from "lucide-react";
 
 export default function Home() {
   const router = useRouter();
@@ -91,21 +92,15 @@ export default function Home() {
               </p>
               <ul className="space-y-4">
                 <li className="flex items-center gap-3 text-body-md">
-                  <span className="material-symbols-outlined text-primary">
-                    auto_awesome
-                  </span>
+                  <Sparkles className="" />
                   <span>Intelligent route optimization</span>
                 </li>
                 <li className="flex items-center gap-3 text-body-md">
-                  <span className="material-symbols-outlined text-primary">
-                    layers
-                  </span>
+                  <Layers className="" />
                   <span>Multi-layered interest maps</span>
                 </li>
                 <li className="flex items-center gap-3 text-body-md">
-                  <span className="material-symbols-outlined text-primary">
-                    offline_pin
-                  </span>
+                  <GlobeX className="" />
                   <span>Seamless offline sync for remote exploring</span>
                 </li>
               </ul>
