@@ -13,7 +13,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Komorebi | Mindful Travel Planning",
+  title: "Waypoint | Mindful Travel Planning",
   description:
     "A map-first travel planning app for mindful, intentional itineraries.",
 };

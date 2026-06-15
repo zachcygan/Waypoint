@@ -4,7 +4,7 @@ export function Footer() {
       <div className="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto w-full gap-8">
         <div className="text-center md:text-left">
           <div className="font-headline-md text-headline-md text-secondary mb-2">
-            Komorebi
+            Waypoint
           </div>
           <p className="font-body-md text-secondary-fixed-dim text-sm max-w-70">
             Curating the beauty of the world&apos;s journeys through intentional
