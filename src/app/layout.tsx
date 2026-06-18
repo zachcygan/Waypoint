@@ -18,7 +18,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Waypoint | Mindful Travel Planning",
+  title: "Waypoint | Travel with Intent",
   description:
     "A map-first travel planning app for mindful, intentional itineraries.",
 };
