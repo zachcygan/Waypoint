@@ -1,9 +1,8 @@
 "use client";
 
 import { Footer } from "@/components/Footer";
-import { MainNav } from "@/components/MainNav";
+import Navbar from "@/components/Navbar";
 import { useRouter } from "next/navigation";
-import Map from "@/components/map";
 import { useEffect } from "react";
 import { Sparkles, Layers, GlobeX } from "lucide-react";
 
@@ -36,7 +35,7 @@ export default function Home() {
 
   return (
     <div className="bg-background">
-      <MainNav />
+      <Navbar />
       <main>
         <section className="relative min-h-230.25 flex items-center pt-16 overflow-hidden">
           <div className="absolute inset-0 z-0">
