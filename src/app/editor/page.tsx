@@ -1,6 +1,4 @@
 "use client";
-
-import { MobileNav } from "@/components/MobileNav";
 import { SidebarNav } from "@/components/SidebarNav";
 import { useRouter } from "next/navigation";
 
@@ -82,7 +80,6 @@ export default function EditorRoutePage() {
           </div>
         </div>
       </main>
-      <MobileNav active="editor" />
     </div>
   );
 }

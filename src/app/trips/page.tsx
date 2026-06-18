@@ -1,7 +1,4 @@
 "use client";
-
-import { Footer } from "@/components/Footer";
-import { MobileNav } from "@/components/MobileNav";
 import { SidebarNav } from "@/components/SidebarNav";
 import { useRouter } from "next/navigation";
 
@@ -71,9 +68,7 @@ export default function TripsPage() {
             </div>
           </div>
         </section>
-        <Footer />
       </main>
-      <MobileNav active="trips" />
     </div>
   );
 }

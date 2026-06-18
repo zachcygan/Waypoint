@@ -15,10 +15,10 @@ export default function Navbar() {
 
 const NavbarItems = () => {
   const navItems = [
-    { name: "Work", link: "#" },
-    { name: "Services", link: "#" },
-    { name: "Pricing", link: "#" },
-    { name: "Contact", link: "#" },
+    { name: "Editor", link: "/editor" },
+    { name: "Place", link: "/place" },
+    { name: "Trips", link: "/trips" },
+    { name: "Map", link: "/map" },
   ];
 
   return (

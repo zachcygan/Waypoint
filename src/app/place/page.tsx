@@ -1,8 +1,6 @@
 "use client";
 
 import { Footer } from "@/components/Footer";
-import { MainNav } from "@/components/MainNav";
-import { MobileNav } from "@/components/MobileNav";
 import { useRouter } from "next/navigation";
 
 export default function PlacePage() {
@@ -10,7 +8,6 @@ export default function PlacePage() {
 
   return (
     <div className="bg-background min-h-screen">
-      <MainNav />
       <main className="pt-32 pb-section-gap max-w-container-max mx-auto px-margin-desktop">
         <div className="flex items-center justify-between mb-8">
           <button
@@ -82,8 +79,6 @@ export default function PlacePage() {
           </aside>
         </div>
       </main>
-      <Footer />
-      <MobileNav active="place" />
     </div>
   );
 }
