@@ -99,7 +99,7 @@ const DesktopNav = ({ navItems }: any) => {
       </div>
       <button
         onClick={handleAuthClick}
-        className="hidden rounded-full bg-black px-8 py-2 text-sm font-bold text-white shadow-[0px_-2px_0px_0px_rgba(255,255,255,0.4)_inset] w-25 text-nowrap hover:cursor-pointer md:block dark:bg-white dark:text-black"
+        className="hidden w-25 text-nowrap rounded-full bg-black px-8 py-2 text-center text-sm font-bold text-white shadow-[0px_-2px_0px_0px_rgba(255,255,255,0.4)_inset] hover:cursor-pointer md:inline-flex md:items-center md:justify-center dark:bg-white dark:text-black"
         type="button"
       >
         {authLabel}
@@ -188,7 +188,7 @@ const MobileNav = ({ navItems }: any) => {
               ))}
               <button
                 onClick={handleAuthClick}
-                className="w-full rounded-lg bg-black px-8 py-2 font-medium text-white shadow-[0px_-2px_0px_0px_rgba(255,255,255,0.4)_inset] dark:bg-white dark:text-black"
+                className="inline-flex w-full items-center justify-center rounded-lg bg-black px-8 py-2 text-center font-medium text-white shadow-[0px_-2px_0px_0px_rgba(255,255,255,0.4)_inset] dark:bg-white dark:text-black"
                 type="button"
               >
                 {authLabel}
