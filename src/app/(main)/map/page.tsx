@@ -1,9 +1,9 @@
-import MapPage from "@/components/Map";
+import TripMap from "@/components/Map";
 
 export default function Map() {
   return (
     <main className="p-6">
-      <MapPage />
+      <TripMap />
     </main>
   );
 }

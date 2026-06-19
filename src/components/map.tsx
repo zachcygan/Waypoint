@@ -10,7 +10,7 @@ type Place = {
   longitude: number | null;
 };
 
-export default function MapPage() {
+export default function TripMap() {
   const [places, setPlaces] = useState<Place[]>([]);
   const [error, setError] = useState<string | null>(null);
 
