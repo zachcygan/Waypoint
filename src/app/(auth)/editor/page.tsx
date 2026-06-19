@@ -2,7 +2,8 @@
 import TripMap from "@/components/trip-map";
 import { SidebarNav } from "@/components/SidebarNav";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { MapPin, Clock, DollarSign } from "lucide-react";
 
 type Place = {
   id: number;
@@ -15,11 +16,12 @@ export default function EditorRoutePage() {
   const [places, setPlaces] = useState<Place[]>([]);
   const [isLoadingPlaces, setIsLoadingPlaces] = useState(true);
   const [placesError, setPlacesError] = useState<string | null>(null);
+  const enrichedPlaceIds = useRef(new Set<number>());
 
   useEffect(() => {
     async function getPlaces() {
       try {
-        const res = await fetch("/api/places");
+        const res = await fetch("/api/places", { cache: "no-store" });
 
         if (!res.ok) {
           throw new Error("Failed to load places");
@@ -37,6 +39,57 @@ export default function EditorRoutePage() {
 
     getPlaces();
   }, []);
+
+  useEffect(() => {
+    async function enrichMissingDescriptions() {
+      const placesToEnrich = places.filter(
+        (place) =>
+          !place.description?.trim() && !enrichedPlaceIds.current.has(place.id),
+      );
+
+      if (placesToEnrich.length === 0) {
+        return;
+      }
+
+      await Promise.all(
+        placesToEnrich.map(async (place) => {
+          enrichedPlaceIds.current.add(place.id);
+
+          try {
+            const res = await fetch(`/api/places/${place.id}/description`, {
+              method: "POST",
+              cache: "no-store",
+            });
+
+            if (!res.ok) {
+              return;
+            }
+
+            const data = (await res.json()) as { description?: string };
+
+            if (!data.description?.trim()) {
+              return;
+            }
+
+            setPlaces((currentPlaces) =>
+              currentPlaces.map((currentPlace) =>
+                currentPlace.id === place.id
+                  ? {
+                      ...currentPlace,
+                      description: data.description ?? null,
+                    }
+                  : currentPlace,
+              ),
+            );
+          } catch (error) {
+            console.error(error);
+          }
+        }),
+      );
+    }
+
+    enrichMissingDescriptions();
+  }, [places]);
 
   return (
     <div className="flex h-screen w-full overflow-hidden">

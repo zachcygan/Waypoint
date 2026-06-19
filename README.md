@@ -34,3 +34,18 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Place Descriptions
+
+Place details now auto-populate descriptions from external providers:
+
+- Primary: Google Places API (editorial summary)
+- Fallback: Wikipedia summary API
+
+Set this environment variable to enable Google Places lookups:
+
+```bash
+GOOGLE_MAPS_API_KEY=your_google_maps_key
+```
+
+If the Google key is missing or no summary is available, the app will attempt Wikipedia automatically.

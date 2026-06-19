@@ -1,8 +1,10 @@
 import { prisma } from "@/lib/prisma";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import PlaceDescription from "@/components/place-description";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { notFound, redirect } from "next/navigation";
+import { ArrowLeft, MapPin, Clock, DollarSign } from "lucide-react";
 
 function formatCategoryLabel(category: string) {
   return category
@@ -55,9 +57,7 @@ export default async function PlaceDetailsPage({
             className="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors group"
             href="/editor"
           >
-            <span className="material-symbols-outlined text-body-lg group-hover:-translate-x-1 transition-transform">
-              arrow_back
-            </span>
+            <ArrowLeft className="text-body-lg group-hover:-translate-x-1 transition-transform" />
             <span className="font-label-sm text-label-sm uppercase tracking-widest">
               Back to Editor
             </span>
@@ -70,9 +70,10 @@ export default async function PlaceDetailsPage({
               <h1 className="font-display-lg text-display-lg text-on-surface mb-4">
                 {place.name}
               </h1>
-              <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed max-w-2xl">
-                {place.description ?? "No description available yet."}
-              </p>
+              <PlaceDescription
+                placeId={place.id}
+                initialDescription={place.description}
+              />
             </section>
           </div>
 
@@ -80,9 +81,7 @@ export default async function PlaceDetailsPage({
             <div className="bg-surface-container-lowest rounded-xl p-8 tonal-layer-1 border border-surface-variant space-y-8">
               <div className="space-y-6">
                 <div className="flex gap-4">
-                  <span className="material-symbols-outlined text-primary mt-1">
-                    location_on
-                  </span>
+                  <MapPin className="size-6 text-outline" />
                   <div>
                     <span className="font-label-sm text-label-sm text-outline uppercase">
                       Address
@@ -94,12 +93,10 @@ export default async function PlaceDetailsPage({
                 </div>
 
                 <div className="flex gap-4">
-                  <span className="material-symbols-outlined text-primary mt-1">
-                    category
-                  </span>
+                  <Clock className="size-6 text-outline" />
                   <div>
                     <span className="font-label-sm text-label-sm text-outline uppercase">
-                      Category
+                      Operating Hours
                     </span>
                     <p className="font-body-md text-body-md text-on-surface">
                       {formatCategoryLabel(place.category)}
@@ -108,12 +105,10 @@ export default async function PlaceDetailsPage({
                 </div>
 
                 <div className="flex gap-4">
-                  <span className="material-symbols-outlined text-primary mt-1">
-                    route
-                  </span>
+                  <DollarSign className="size-6 text-outline" />
                   <div>
                     <span className="font-label-sm text-label-sm text-outline uppercase">
-                      Trip
+                      Entrance Fee
                     </span>
                     <p className="font-body-md text-body-md text-on-surface">
                       {place.trip.name}
