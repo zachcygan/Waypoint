@@ -1,9 +1,42 @@
 "use client";
+import TripMap from "@/components/trip-map";
 import { SidebarNav } from "@/components/SidebarNav";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
+type Place = {
+  id: number;
+  name: string;
+  description: string | null;
+};
 
 export default function EditorRoutePage() {
   const router = useRouter();
+  const [places, setPlaces] = useState<Place[]>([]);
+  const [isLoadingPlaces, setIsLoadingPlaces] = useState(true);
+  const [placesError, setPlacesError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function getPlaces() {
+      try {
+        const res = await fetch("/api/places");
+
+        if (!res.ok) {
+          throw new Error("Failed to load places");
+        }
+
+        const data: Place[] = await res.json();
+        setPlaces(data);
+      } catch (error) {
+        console.error(error);
+        setPlacesError("Could not load places");
+      } finally {
+        setIsLoadingPlaces(false);
+      }
+    }
+
+    getPlaces();
+  }, []);
 
   return (
     <div className="flex h-screen w-full overflow-hidden">
@@ -26,7 +59,7 @@ export default function EditorRoutePage() {
                 Planned Stops
               </h2>
               <span className="font-label-sm text-label-sm text-primary px-2 py-1 bg-primary-fixed rounded">
-                8 Items
+                {places.length} {places.length === 1 ? "Item" : "Items"}
               </span>
             </div>
           </div>
@@ -35,35 +68,52 @@ export default function EditorRoutePage() {
               <label className="font-label-sm text-label-sm text-outline uppercase tracking-widest px-2">
                 Sights
               </label>
-              <div
-                onClick={() => router.push("/place")}
-                className="group p-4 bg-surface-container-lowest rounded-xl border border-transparent hover:border-primary-fixed transition-all cursor-pointer flex gap-4"
-              >
-                <div className="w-12 h-12 rounded-lg bg-secondary-fixed flex items-center justify-center text-secondary shrink-0">
-                  <span className="material-symbols-outlined">
-                    camera_enhance
-                  </span>
+
+              {isLoadingPlaces ? (
+                <div className="p-4 text-[12px] text-on-surface-variant">
+                  Loading your places...
                 </div>
-                <div className="flex-1">
-                  <h3 className="font-label-sm text-label-sm text-on-surface">
-                    Kinkaku-ji
-                  </h3>
-                  <p className="text-[12px] text-on-surface-variant">
-                    The Golden Pavilion
-                  </p>
+              ) : null}
+
+              {!isLoadingPlaces && placesError ? (
+                <div className="p-4 text-[12px] text-error">{placesError}</div>
+              ) : null}
+
+              {!isLoadingPlaces && !placesError && places.length === 0 ? (
+                <div className="p-4 text-[12px] text-on-surface-variant">
+                  No saved places yet.
                 </div>
-              </div>
+              ) : null}
+
+              {!isLoadingPlaces && !placesError
+                ? places.map((place) => (
+                    <button
+                      key={place.id}
+                      onClick={() => router.push(`/place/${place.id}`)}
+                      className="w-full text-left group p-4 bg-surface-container-lowest rounded-xl border border-transparent hover:border-primary-fixed transition-all cursor-pointer flex gap-4"
+                      type="button"
+                    >
+                      <div className="w-12 h-12 rounded-lg bg-secondary-fixed flex items-center justify-center text-secondary shrink-0">
+                        <span className="material-symbols-outlined">
+                          camera_enhance
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-label-sm text-label-sm text-on-surface">
+                          {place.name}
+                        </h3>
+                        <p className="text-[12px] text-on-surface-variant line-clamp-2">
+                          {place.description ?? "No description"}
+                        </p>
+                      </div>
+                    </button>
+                  ))
+                : null}
             </div>
           </div>
         </div>
         <div className="flex-1 h-full bg-surface-container relative overflow-hidden">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage:
-                "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCqYIch6HHrNCR9IOXy8YHmLZuBAxG163SGF3qvRAKWciuBpZIt_55qCzZ1zGvPzK99VFeGNaxZ--LIZBujrn8tw4yFB6ijaeqIn9Kdx_L3w0S8JLnGSoqCZnlS56aMlxif5lkuCZstDgcvKNf_B0b122O9cE9Y-QQsI-u3UsJxtYDq5H3TW0VSlPFQ-T3AmBfyZ5ThhtQ18EqWdEg-JTP4gQCjzSkbroK21l9mO1Ccrb7Vvu-e0ixTBIl6YI7-pX-tH-V7p2_uiNE')",
-            }}
-          />
+          <TripMap />
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-[15%] left-[45%] pointer-events-auto">
               <button
