@@ -216,7 +216,7 @@ function NexusLogo(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export default function PremiumAuthSplit() {
+export default function LoginPage() {
   return (
     <div className="grid h-screen w-full grid-cols-1 bg-white lg:grid-cols-2 dark:bg-neutral-900">
       <div className="relative hidden overflow-hidden bg-[#0a0a0f] lg:block">
