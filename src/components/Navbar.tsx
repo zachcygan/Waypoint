@@ -2,8 +2,9 @@
 import { cn } from "@/lib/utils";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "motion/react";
+import { signIn, signOut } from "next-auth/react";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Navbar() {
   return (
@@ -31,6 +32,43 @@ const NavbarItems = () => {
 
 const DesktopNav = ({ navItems }: any) => {
   const [hovered, setHovered] = useState<number | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadSession = async () => {
+      try {
+        const res = await fetch("/api/auth/session", { cache: "no-store" });
+        const session = res.ok ? await res.json() : null;
+        if (isMounted) {
+          setIsAuthenticated(Boolean(session?.user));
+        }
+      } catch {
+        if (isMounted) {
+          setIsAuthenticated(false);
+        }
+      }
+    };
+
+    void loadSession();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleAuthClick = () => {
+    if (isAuthenticated) {
+      void signOut({ callbackUrl: "/" });
+      return;
+    }
+
+    void signIn("google", { callbackUrl: "/" });
+  };
+
+  const authLabel = isAuthenticated ? "Log Out" : "Log In";
+
   return (
     <motion.div
       onMouseLeave={() => {
@@ -59,8 +97,12 @@ const DesktopNav = ({ navItems }: any) => {
           </Link>
         ))}
       </div>
-      <button className="hidden rounded-full bg-black px-8 py-2 text-sm font-bold text-white shadow-[0px_-2px_0px_0px_rgba(255,255,255,0.4)_inset] md:block dark:bg-white dark:text-black">
-        Book a call
+      <button
+        onClick={handleAuthClick}
+        className="hidden rounded-full bg-black px-8 py-2 text-sm font-bold text-white shadow-[0px_-2px_0px_0px_rgba(255,255,255,0.4)_inset] w-25 text-nowrap hover:cursor-pointer md:block dark:bg-white dark:text-black"
+        type="button"
+      >
+        {authLabel}
       </button>
     </motion.div>
   );
@@ -68,6 +110,42 @@ const DesktopNav = ({ navItems }: any) => {
 
 const MobileNav = ({ navItems }: any) => {
   const [open, setOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadSession = async () => {
+      try {
+        const res = await fetch("/api/auth/session", { cache: "no-store" });
+        const session = res.ok ? await res.json() : null;
+        if (isMounted) {
+          setIsAuthenticated(Boolean(session?.user));
+        }
+      } catch {
+        if (isMounted) {
+          setIsAuthenticated(false);
+        }
+      }
+    };
+
+    void loadSession();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleAuthClick = () => {
+    if (isAuthenticated) {
+      void signOut({ callbackUrl: "/" });
+      return;
+    }
+
+    void signIn("google", { callbackUrl: "/" });
+  };
+
+  const authLabel = isAuthenticated ? "Log Out" : "Log In";
 
   return (
     <>
@@ -108,8 +186,12 @@ const MobileNav = ({ navItems }: any) => {
                   <motion.span className="block">{navItem.name} </motion.span>
                 </Link>
               ))}
-              <button className="w-full rounded-lg bg-black px-8 py-2 font-medium text-white shadow-[0px_-2px_0px_0px_rgba(255,255,255,0.4)_inset] dark:bg-white dark:text-black">
-                Book a call
+              <button
+                onClick={handleAuthClick}
+                className="w-full rounded-lg bg-black px-8 py-2 font-medium text-white shadow-[0px_-2px_0px_0px_rgba(255,255,255,0.4)_inset] dark:bg-white dark:text-black"
+                type="button"
+              >
+                {authLabel}
               </button>
             </motion.div>
           )}
