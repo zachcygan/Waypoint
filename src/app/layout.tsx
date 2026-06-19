@@ -40,8 +40,10 @@ export default function RootLayout({
         inter.variable,
       )}
     >
-      <body className="min-h-full flex flex-col">
-        <Navbar />
+      <body className="relative min-h-full flex flex-col">
+        <div className="absolute inset-x-0 top-0 z-50">
+          <Navbar />
+        </div>
         {children}
         <Footer />
       </body>
