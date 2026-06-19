@@ -75,11 +75,13 @@ const DesktopNav = ({ navItems }: any) => {
         setHovered(null);
       }}
       className={cn(
-        "relative z-60 mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-white px-4 py-2 lg:flex dark:bg-neutral-950",
+        "relative z-60 mx-auto hidden w-full max-w-7xl grid-cols-[1fr_auto_1fr] items-center self-start rounded-full bg-white px-4 py-2 lg:grid dark:bg-neutral-950",
       )}
     >
-      <Logo />
-      <div className="hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-2">
+      <div className="justify-self-start">
+        <Logo />
+      </div>
+      <div className="flex flex-row items-center justify-center space-x-2 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:space-x-2">
         {navItems.map((navItem: any, idx: number) => (
           <Link
             onMouseEnter={() => setHovered(idx)}
@@ -97,13 +99,15 @@ const DesktopNav = ({ navItems }: any) => {
           </Link>
         ))}
       </div>
-      <button
-        onClick={handleAuthClick}
-        className="hidden w-25 text-nowrap rounded-full bg-black px-8 py-2 text-center text-sm font-bold text-white shadow-[0px_-2px_0px_0px_rgba(255,255,255,0.4)_inset] hover:cursor-pointer md:inline-flex md:items-center md:justify-center dark:bg-white dark:text-black"
-        type="button"
-      >
-        {authLabel}
-      </button>
+      <div className="justify-self-end">
+        <button
+          onClick={handleAuthClick}
+          className="w-25 text-nowrap rounded-full bg-black px-8 py-2 text-center text-sm font-bold text-white shadow-[0px_-2px_0px_0px_rgba(255,255,255,0.4)_inset] hover:cursor-pointer md:inline-flex md:items-center md:justify-center dark:bg-white dark:text-black"
+          type="button"
+        >
+          {authLabel}
+        </button>
+      </div>
     </motion.div>
   );
 };
