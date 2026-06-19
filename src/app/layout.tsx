@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
 import { Manrope, Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -40,13 +38,7 @@ export default function RootLayout({
         inter.variable,
       )}
     >
-      <body className="relative min-h-full flex flex-col">
-        <div className="absolute inset-x-0 top-0 z-50">
-          <Navbar />
-        </div>
-        {children}
-        <Footer />
-      </body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }

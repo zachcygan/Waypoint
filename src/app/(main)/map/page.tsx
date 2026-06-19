@@ -1,4 +1,4 @@
-import TripMap from "@/components/map";
+import TripMap from "@/components/Map";
 
 export default function MapPage() {
   return (
