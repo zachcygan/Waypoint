@@ -3,6 +3,7 @@ import TripMap from "@/components/trip-map";
 import { SidebarNav } from "@/components/SidebarNav";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { Search } from "lucide-react";
 
 type Place = {
   id: number;
@@ -98,7 +99,7 @@ export default function EditorRoutePage() {
           <div className="p-6 space-y-4 border-b border-outline-variant/30">
             <div className="relative group">
               <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">
-                search
+                <Search className="size-5" />
               </span>
               <input
                 className="w-full pl-10 pr-4 py-3 bg-surface-container-low border-b border-outline-variant focus:border-primary focus:ring-0 transition-all font-body-md text-on-surface"
