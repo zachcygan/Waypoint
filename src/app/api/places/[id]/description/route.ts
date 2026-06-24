@@ -118,10 +118,7 @@ async function getGooglePlacesDescription(
   latitude: number | null,
   longitude: number | null,
 ): Promise<DescriptionResult | null> {
-  const attempts = [
-    `${placeName}, ${placeAddress}`,
-    placeName,
-  ];
+  const attempts = [`${placeName}, ${placeAddress}`, placeName];
 
   for (const query of attempts) {
     const match = await searchGooglePlaces(query, latitude, longitude);
@@ -259,8 +256,7 @@ export async function POST(
       place.address,
       place.latitude,
       place.longitude,
-    )) ??
-    (await getWikipediaDescription(place.name, place.address));
+    )) ?? (await getWikipediaDescription(place.name, place.address));
 
   if (!descriptionResult) {
     return NextResponse.json(
