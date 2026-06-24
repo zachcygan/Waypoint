@@ -55,7 +55,7 @@ export default async function PlaceDetailsPage({
         <div className="flex items-center justify-between mb-8">
           <Link
             className="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors group"
-            href="/editor"
+            href={`/trips/${place.tripId}/edit`}
           >
             <ArrowLeft className="text-body-lg group-hover:-translate-x-1 transition-transform" />
             <span className="font-label-sm text-label-sm uppercase tracking-widest">
@@ -120,9 +120,9 @@ export default async function PlaceDetailsPage({
               <div className="space-y-3">
                 <Link
                   className="block w-full bg-primary text-on-primary text-center py-4 rounded-lg font-medium hover:bg-surface-tint transition-colors active:scale-95"
-                  href="/editor"
+                  href={`/trips/${place.tripId}/edit`}
                 >
-                  Back to Map
+                  Back to Editor
                 </Link>
               </div>
             </div>

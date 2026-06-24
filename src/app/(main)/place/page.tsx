@@ -1,6 +1,5 @@
 "use client";
 
-import { Footer } from "@/components/Footer";
 import { useRouter } from "next/navigation";
 
 export default function PlacePage() {
@@ -19,7 +18,7 @@ export default function PlacePage() {
               arrow_back
             </span>
             <span className="font-label-sm text-label-sm uppercase tracking-widest">
-              Back to Map
+              Back to Trips
             </span>
           </button>
         </div>
@@ -68,11 +67,11 @@ export default function PlacePage() {
               </div>
               <div className="space-y-3">
                 <button
-                  onClick={() => router.push("/editor")}
+                  onClick={() => router.push("/trips")}
                   className="w-full bg-primary text-on-primary py-4 rounded-lg font-medium hover:bg-surface-tint transition-colors active:scale-95"
                   type="button"
                 >
-                  Get Directions
+                  Back to Trips
                 </button>
               </div>
             </div>

@@ -10,14 +10,24 @@ type Place = {
   longitude: number | null;
 };
 
-export default function TripMap() {
+type TripMapProps = {
+  tripId?: number;
+  initialViewState?: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
+};
+
+export default function TripMap({ initialViewState, tripId }: TripMapProps) {
   const [places, setPlaces] = useState<Place[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function getPlaces() {
       try {
-        const res = await fetch("/api/places");
+        const query = tripId ? `?tripId=${tripId}` : "";
+        const res = await fetch(`/api/places${query}`);
         if (!res.ok) throw new Error("Failed to load places");
         const data = await res.json();
         setPlaces(data);
@@ -28,10 +38,10 @@ export default function TripMap() {
     }
 
     getPlaces();
-  }, []);
+  }, [tripId]);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden rounded-xl">
+    <div className="relative h-full w-full overflow-hidden">
       {error && (
         <div className="absolute left-4 top-4 z-10 rounded bg-white p-2 text-sm">
           {error}
@@ -41,9 +51,9 @@ export default function TripMap() {
       <Map
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
         initialViewState={{
-          longitude: 139.6917,
-          latitude: 35.6895,
-          zoom: 10,
+          longitude: initialViewState?.longitude ?? 139.6917,
+          latitude: initialViewState?.latitude ?? 35.6895,
+          zoom: initialViewState?.zoom ?? 10,
         }}
         mapStyle="mapbox://styles/mapbox/standard"
         style={{

@@ -3,7 +3,15 @@ import { Map, LayoutDashboard, MapPin, Settings } from "lucide-react";
 
 type SidebarActive = "editor" | "trips" | "place";
 
-export function SidebarNav({ active }: { active: SidebarActive }) {
+export function SidebarNav({
+  active,
+  tripId,
+  tripName = "Trip Planner",
+}: {
+  active: SidebarActive;
+  tripId?: number;
+  tripName?: string;
+}) {
   const linkStyle = (key: SidebarActive) =>
     `flex items-center px-4 py-3 rounded-lg transition-all duration-200 cursor-pointer font-label-sm text-label-sm ${
       active === key
@@ -15,14 +23,17 @@ export function SidebarNav({ active }: { active: SidebarActive }) {
     <aside className="hidden md:flex flex-col p-base space-y-4 h-screen w-64 border-r border-outline-variant bg-surface-container-low sticky top-0">
       <div className="px-4 py-6">
         <h1 className="font-headline-md text-headline-md text-primary">
-          Trip Planner
+          Waypoint
         </h1>
         <p className="font-label-sm text-label-sm text-on-surface-variant opacity-70">
-          Kyoto Autumn 2024
+          {tripName}
         </p>
       </div>
       <nav className="flex-1 space-y-2 px-2">
-        <Link href="/editor" className={linkStyle("editor")}>
+        <Link
+          href={tripId ? `/trips/${tripId}/edit` : "/trips"}
+          className={linkStyle("editor")}
+        >
           <Map className="mr-3" /> Map Editor
         </Link>
         <Link href="/trips" className={linkStyle("trips")}>

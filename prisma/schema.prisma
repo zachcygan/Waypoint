@@ -55,13 +55,17 @@ model VerificationToken {
 }
 
 model Trip {
-  id        Int      @id @default(autoincrement())
-  name      String
-  userId    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  places    Place[]
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id              Int      @id @default(autoincrement())
+  name            String
+  destination     String?
+  centerLatitude  Float?
+  centerLongitude Float?
+  mapZoom         Float?
+  userId          String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  places          Place[]
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Place {

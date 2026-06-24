@@ -4,7 +4,19 @@ import { IconMenu2, IconX } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "motion/react";
 import { signIn, signOut } from "next-auth/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
+
+type NavItem = {
+  name: string;
+  link: string;
+};
+
+type ResponsiveNavProps = {
+  appItems: NavItem[];
+  isTripRoute: boolean;
+  marketingItems: NavItem[];
+};
 
 export default function Navbar() {
   return (
@@ -15,22 +27,38 @@ export default function Navbar() {
 }
 
 const NavbarItems = () => {
-  const navItems = [
-    { name: "Editor", link: "/editor" },
-    { name: "Place", link: "/place" },
+  const pathname = usePathname();
+  const isTripRoute = pathname.startsWith("/trips");
+  const marketingItems = [
     { name: "Trips", link: "/trips" },
     { name: "Map", link: "/map" },
+  ];
+  const appItems = [
+    { name: "Dashboard", link: "/trips" },
+    { name: "New Trip", link: "/trips/new" },
   ];
 
   return (
     <div className="w-full">
-      <DesktopNav navItems={navItems} />
-      <MobileNav navItems={navItems} />
+      <DesktopNav
+        appItems={appItems}
+        isTripRoute={isTripRoute}
+        marketingItems={marketingItems}
+      />
+      <MobileNav
+        appItems={appItems}
+        isTripRoute={isTripRoute}
+        marketingItems={marketingItems}
+      />
     </div>
   );
 };
 
-const DesktopNav = ({ navItems }: any) => {
+const DesktopNav = ({
+  appItems,
+  isTripRoute,
+  marketingItems,
+}: ResponsiveNavProps) => {
   const [hovered, setHovered] = useState<number | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
@@ -68,6 +96,7 @@ const DesktopNav = ({ navItems }: any) => {
   };
 
   const authLabel = isAuthenticated ? "Log Out" : "Log In";
+  const navItems = isAuthenticated && isTripRoute ? appItems : marketingItems;
 
   return (
     <motion.div
@@ -82,7 +111,7 @@ const DesktopNav = ({ navItems }: any) => {
         <Logo />
       </div>
       <div className="flex flex-row items-center justify-center space-x-2 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:space-x-2">
-        {navItems.map((navItem: any, idx: number) => (
+        {navItems.map((navItem, idx) => (
           <Link
             onMouseEnter={() => setHovered(idx)}
             className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300"
@@ -112,7 +141,11 @@ const DesktopNav = ({ navItems }: any) => {
   );
 };
 
-const MobileNav = ({ navItems }: any) => {
+const MobileNav = ({
+  appItems,
+  isTripRoute,
+  marketingItems,
+}: ResponsiveNavProps) => {
   const [open, setOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
@@ -150,6 +183,7 @@ const MobileNav = ({ navItems }: any) => {
   };
 
   const authLabel = isAuthenticated ? "Log Out" : "Log In";
+  const navItems = isAuthenticated && isTripRoute ? appItems : marketingItems;
 
   return (
     <>
@@ -181,7 +215,7 @@ const MobileNav = ({ navItems }: any) => {
               exit={{ opacity: 0 }}
               className="absolute inset-x-0 top-16 z-20 flex w-full flex-col items-start justify-start gap-4 rounded-lg bg-white px-4 py-8 dark:bg-neutral-950"
             >
-              {navItems.map((navItem: any, idx: number) => (
+              {navItems.map((navItem, idx) => (
                 <Link
                   key={`link=${idx}`}
                   href={navItem.link}
